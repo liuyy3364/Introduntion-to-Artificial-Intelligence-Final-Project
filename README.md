@@ -32,21 +32,21 @@ class C():
     主程式
 
 - Detector:
-  - base-opencv haar cascade
-  - advance-yolo
-  - input:frame
-  - output:bounding boxes
+  - base: opencv haar cascade
+  - advance: yolo
+  - input: frame
+  - output: bounding boxes
 
 - Tracker:
-  - base:opencv tracker
-  - advance-SORT or DeepSORT
-  - input:frame
-  - output:assigned IDs
+  - base: opencv tracker
+  - advance: SORT or DeepSORT
+  - input: frame
+  - output: assigned IDs
 
 - Display
-  - base:我打算用嵌入式系統的 flask 做 video stream，很簡單，翁要也行，記得不能在 main thread 跑，把 debug 設成 False 就能在 其他 thread app.start()了
+  - base: 我打算用嵌入式系統的 flask 做 video stream，很簡單，翁要也行，記得不能在 main thread 跑，把 debug 設成 False 就能在 其他 thread app.start()了
   - advance: 有想到再考慮要不要，這部分沒那麼重要，其實有 base 就夠了
-  - input:frame + bounding boxes with ID
+  - input: frame + bounding boxes with ID
   - output: display input frame by somehow
 
 - Benchmarker
