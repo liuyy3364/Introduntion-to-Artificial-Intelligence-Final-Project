@@ -33,7 +33,7 @@ class C():
 
 - Detector:
   - base-opencv haar cascade
-  - advance-yoloV4
+  - advance-yolo
   - input:frame
   - output:bounding boxes
 
@@ -62,16 +62,38 @@ class C():
 
 ## 分工方式
 
-自己fork之後認領上面的部件創 PR
+麻煩也把安裝的 module 列表也傳上來，執行了pip install就放進Requirement_ID末三碼.txt，可以參考一下我的，盡量同步一下環境，目前我用 python3.8，大家也用一下虛擬環境的程式來創一個乾淨的 python 3.8 環境
+
+自己fork之後認領上面的部件創 PR 或直接push空檔上來，認領前記得先 pull 看一下
 
 例：認領detector:
 
 ``` bash
 #指令不一定對，傳達概念而已，自己調成對的
-touch Detector.py
+echo "# 301" > Detector.py
 git add Detector.py
 git commit -m "detector init commit"
 git push
 ```
 
-然後再丟 Pull Request 給我，接受後我的 Repo 就會有你認領的空檔了，自己認領前先注意有沒有已經存再在我的 branch 裡，開始做新檔案時先檢查有沒有被其他人認領過
+然後再丟 Pull Request 給我（或commit + push），我 merge 後我的 Repo 就會有你認領的空檔了，認領前先注意有沒有已經存在在我的 branch 裡，或 PR 裡有沒有其他還沒 merge 的 PR，認領完後記得 pull 一次，看開頭是不是真的是你的學號，是再繼續做
+
+``` bash
+# 認領完後
+git pull
+cat 認領.py
+# output: # 301
+# 開始實作
+```
+
+做完一個再認領下一個，如果那個部件需要一些本地資源，如 pre-trained model，創一個跟部件同名的資料夾，把需要的資源丟進去，超過 100 MB，就傳到 google drive 上，然後開對知道連結的人(不是僅限交大)的檢視者權限，然後把連結丟進去，順便寫在你的 requirement 裡
+
+## 補充 background
+
+[MOT簡介](https://peaceful0907.medium.com/%E5%88%9D%E6%8E%A2%E7%89%A9%E4%BB%B6%E8%BF%BD%E8%B9%A4-multiple-object-tracking-mot-4f1b42e959f9)
+[更詳細的但我覺得用不到看這麼細](https://www.zhihu.com/column/c_1102212337087401984)
+[OpenCV padetrian detection](https://www.youtube.com/watch?v=LdlHEr6t45g)
+[YOLOv5](https://github.com/ultralytics/yolov5) ，這是盜版yolo，因為不確定原本的repo是不是darknet，懶得爬，可以用其他的版本不一定要用這個
+[OpenCV centroid tracker](https://www.youtube.com/watch?v=O3b8lVF93jU)
+[DeepSORT](https://github.com/nwojke/deep_sort)
+[SORT](https://github.com/abewley/sort)
