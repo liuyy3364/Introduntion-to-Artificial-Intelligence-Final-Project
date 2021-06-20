@@ -2,4 +2,5 @@
 opencv-python
 flask
 numpy
+pillow
 pytorch==1.0.0 #這不確定 先不要裝
