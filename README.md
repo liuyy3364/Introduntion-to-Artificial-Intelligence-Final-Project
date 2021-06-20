@@ -32,21 +32,21 @@ class C():
     主程式
 
 - Detector:
-  - base-opencv haar cascade
-  - advance-yolo
-  - input:frame
-  - output:bounding boxes
+  - base: opencv haar cascade
+  - advance: yolo
+  - input: frame
+  - output: bounding boxes
 
 - Tracker:
-  - base:opencv tracker
-  - advance-SORT or DeepSORT
-  - input:frame
-  - output:assigned IDs
+  - base: opencv tracker
+  - advance: SORT or DeepSORT
+  - input: frame
+  - output: assigned IDs
 
-- Displayer
-  - base:我打算用嵌入式系統的 flask 做 video stream，很簡單，翁要也行，記得不能在 main thread 跑，把 debug 設成 False 就能在 其他 thread app.start()了
+- Display
+  - base: 我打算用嵌入式系統的 flask 做 video stream，很簡單，翁要也行，記得不能在 main thread 跑，把 debug 設成 False 就能在 其他 thread app.start()了
   - advance: 有想到再考慮要不要，這部分沒那麼重要，其實有 base 就夠了
-  - input:frame + bounding boxes with ID
+  - input: frame + bounding boxes with ID
   - output: display input frame by somehow
 
 - Benchmarker
@@ -86,7 +86,7 @@ cat 認領.py
 # 開始實作
 ```
 
-做完一個再認領下一個，如果那個部件需要一些本地資源，如 pre-trained model，創一個跟部件同名的資料夾，把需要的資源丟進去，超過 100 MB，就傳到 google drive 上，然後開對知道連結的人(不是僅限交大)的檢視者權限，然後把連結丟進去，順便寫在你的 requirement 裡
+做完一個再認領下一個，如果那個部件需要一些本地資源，如 pre-trained model，創一個跟部件同名的資料夾，把需要的資源丟進去，超過 100 MB，就傳到 google drive 上，然後開對知道連結的人(不是僅限交大)的檢視者權限，然後把連結丟進去剛剛創的資料夾，順便寫在你的 requirement 裡
 
 我會慢慢寫一些Template，再把template的class，複製一遍再改名字
 
