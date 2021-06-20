@@ -49,14 +49,14 @@ class Framework():
         frame: input frame
         return: a list of bounding boxes
         """
-        return self.detector.detect()
+        return self.detector.detect(frame)
     
     def track(self, bounding_boxes) -> List[str]:
         """
         input: a list of bounding boxes
         return: a list of IDs
         """
-        return self.tracker.track()
+        return self.tracker.track(bounding_boxes)
     
     def benchmark(self) -> list:
         return self.benchmarker.run()
@@ -78,8 +78,17 @@ class Framework():
         bounding_boxes = self.detect(frame)
         IDs = self.track(bounding_boxes)
 
-        return bounding_boxes, IDs, self.fps
+        return frame, bounding_boxes, IDs, self.fps
 
     def run_and_display(self):
         self.displayer.run()
+        while 1:
+            frame, boxes, IDs, fps = self.run_1_frame()
+            cv2.rectangle(frame, (0, 0), (50, 20), (0, 0, 255), -1)
+            cv2.putText(frame, str(fps), (5, 15), cv2.FONT_HERSHEY_TRIPLEX, 0.5, (0,0,0))
+            for (x, y, w, h), id in zip(boxes, IDs):
+                    cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
+                    cv2.rectangle(frame, (x, y-20), (x+60, 0), (0, 0, 255), -1)
+                    cv2.putText(frame, "ID "+str(id), (5, 15), cv2.FONT_HERSHEY_TRIPLEX, 0.5, (0,0,0))
+        self.displayer.update_frame(frame)
         
