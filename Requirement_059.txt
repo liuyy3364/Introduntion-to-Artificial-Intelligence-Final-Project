@@ -1,0 +1,5 @@
+https://github.com/opencv/opencv/tree/master/data/haarcascades opencv下載xml檔
+update已在reference
+
+pip install opencv-python
+pip install opencv-python-contrib
