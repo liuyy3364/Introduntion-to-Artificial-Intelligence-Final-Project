@@ -6,4 +6,3 @@ import Optimizer
 
 class Framework():
     def __init__(self, arg: dict) -> None:
-        

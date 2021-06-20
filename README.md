@@ -43,7 +43,7 @@ class C():
   - input:frame
   - output:assigned IDs
 
-- Display
+- Displayer
   - base:我打算用嵌入式系統的 flask 做 video stream，很簡單，翁要也行，記得不能在 main thread 跑，把 debug 設成 False 就能在 其他 thread app.start()了
   - advance: 有想到再考慮要不要，這部分沒那麼重要，其實有 base 就夠了
   - input:frame + bounding boxes with ID
@@ -64,7 +64,7 @@ class C():
 
 麻煩也把安裝的 module 列表也傳上來，執行了pip install就放進Requirement_ID末三碼.txt，可以參考一下我的，盡量同步一下環境，目前我用 python3.8，大家也用一下虛擬環境的程式來創一個乾淨的 python 3.8 環境
 
-自己fork之後認領上面的部件創 PR 或直接push空檔上來，認領前記得先 pull 看一下
+自己認領上面的部件，在該部件檔案的開頭加上自己的學號
 
 例：認領detector:
 
@@ -76,7 +76,7 @@ git commit -m "detector init commit"
 git push
 ```
 
-然後再丟 Pull Request 給我（或commit + push），我 merge 後我的 Repo 就會有你認領的空檔了，認領前先注意有沒有已經存在在我的 branch 裡，或 PR 裡有沒有其他還沒 merge 的 PR，認領完後記得 pull 一次，看開頭是不是真的是你的學號，是再繼續做
+之後我的 Repo 就會更新你認領的檔案了，認領前先注意有沒有其他人認領，認領完後記得 pull 一次，看開頭是不是真的是你的學號，是再繼續做，可以看 Optimizer 當範例
 
 ``` bash
 # 認領完後
@@ -87,6 +87,8 @@ cat 認領.py
 ```
 
 做完一個再認領下一個，如果那個部件需要一些本地資源，如 pre-trained model，創一個跟部件同名的資料夾，把需要的資源丟進去，超過 100 MB，就傳到 google drive 上，然後開對知道連結的人(不是僅限交大)的檢視者權限，然後把連結丟進去，順便寫在你的 requirement 裡
+
+我會慢慢寫一些Template，再把template的class，複製一遍再改名字
 
 ## 補充 background
 
