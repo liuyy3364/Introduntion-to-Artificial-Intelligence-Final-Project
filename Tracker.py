@@ -1,3 +1,4 @@
+#059 base
 class Tracker:
     #麻煩 class 名稱第一個字母大寫
     def __init__(self) -> None:

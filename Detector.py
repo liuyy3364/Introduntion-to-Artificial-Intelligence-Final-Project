@@ -1,3 +1,4 @@
+#059 base
 import numpy as np
 
 class Detector:
