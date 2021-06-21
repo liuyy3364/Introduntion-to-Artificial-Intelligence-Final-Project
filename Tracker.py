@@ -17,7 +17,6 @@ class Tracker_Template:
         raise Exception("not implemented")
 
 # SORT
-import copy
 
 class SORT:
     def __init__(self) -> None:
