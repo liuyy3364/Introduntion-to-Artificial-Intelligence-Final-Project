@@ -14,7 +14,7 @@ class Framework():
     t0=0
     t1=0
     fps=0
-    def __init__(self, frame_source='Camera', detector='Detector', 
+    def __init__(self, frame_source='Camera', detector='Haar', 
                 tracker='Tracker', displayer='Displayer', 
                 benchmarker='Benchmarker', optimizer='Optimizer') -> None:      
         """
