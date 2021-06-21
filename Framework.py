@@ -46,16 +46,16 @@ class Framework():
     def detect(self, frame) -> List[Tuple[int,int,int,int]]:
         """
         frame: input frame
-        return: a list of bounding boxes
+        return: a list of bounding boxes, confidence value
         """
         return self.detector.detect(frame)
     
-    def track(self, bounding_boxes) -> List[str]:
+    def track(self, bounding_boxes, scores) -> List[str]:
         """
-        input: a list of bounding boxes
-        return: a list of IDs
+        input: a list of bounding boxes (x, y, w, h, id)
+        return: a list of boundings boxes with its id (x, y, x, y, id)
         """
-        return self.tracker.track(bounding_boxes)
+        return self.tracker.track(bounding_boxes, scores)
     
     def optimize(self) -> list:
         return self.optimizer.optimize()
@@ -68,21 +68,22 @@ class Framework():
             fps: float
         """
         self.t1 = time.time()
-        self.fps = 1 / (self.t1 - self.t0)
+        self.fps = round(1 / (self.t1 - self.t0),1)
         self.t0 = time.time()
         frame = self.frame_source.get_frame()
-        bounding_boxes = self.detect(frame)
-        IDs = self.track(bounding_boxes)
+        bounding_boxes, score = self.detect(frame)
+        BB_IDs = self.track(bounding_boxes, score)
+        BB_IDs = BB_IDs.astype(np.int32)
         if draw:
-            cv2.rectangle(frame, (0, 0), (45, 12), (0, 0, 255), -1)
-            cv2.putText(frame, "FPS "+str(self.fps), (1, 10), cv2.FONT_HERSHEY_TRIPLEX, 0.35, (0,0,0))
-            for (x, y, w, h), id in zip(bounding_boxes, IDs):
+            cv2.rectangle(frame, (0, 0), (150, 25), (0, 0, 255), -1)
+            cv2.putText(frame, "FPS "+str(self.fps), (0, 25), cv2.FONT_HERSHEY_TRIPLEX, 1, (0,0,0))
+            for xmin, ymin, xmax, ymax, id in BB_IDs:
                     # draw bounding box
-                    cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 1)
+                    cv2.rectangle(frame, (xmin, ymin), (xmax, ymax), (0, 255, 0), 1)
                     # put id
-                    cv2.rectangle(frame, (x, y-12), (x+21, y), (0, 0, 255), -1)
-                    cv2.putText(frame, str(id), (x, y-2), cv2.FONT_HERSHEY_TRIPLEX, 0.35, (0,0,0))
-        return frame, bounding_boxes, IDs, self.fps
+                    cv2.rectangle(frame, (xmin,ymin-25), (xmin+50, ymin), (0, 0, 255), -1)
+                    cv2.putText(frame, str(id), (xmin, ymin-2), cv2.FONT_HERSHEY_TRIPLEX, 1, (0,0,0))
+        return frame, BB_IDs, self.fps
 
     def run_and_display(self):
         self.displayer.run()

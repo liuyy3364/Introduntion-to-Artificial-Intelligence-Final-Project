@@ -22,12 +22,14 @@ class Displayer_Template:
         """
         raise Exception("not implemented")
 
+import imutils
 class Flask_VidStream:
     #麻煩 class 名稱第一個字母大寫
     frame = bytes()
 
     def update_frame(self, frame):
         self.frame = frame
+        frame = imutils.resize(self.frame,height=720)
         ret , jpg = cv2.imencode(".jpg", frame)
         jpg = jpg.tobytes()
         webserver.frame_wrapper[0] = jpg

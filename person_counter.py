@@ -1,6 +1,7 @@
 import Framework
 import ID_Base
 import numpy as np
+import cv2
 
 # Solving following system of linear equation
 # ax + b = y
@@ -12,8 +13,8 @@ import numpy as np
 # a, b = np.linalg.solve(a,b) // a=-3, b=8 
 # y = -3x + 8
 
-in_line = [(100, 0),(150, 30)] ##change
-out_line = [(0, 90),(50 ,120)] ##change
+in_line = [(768, 0),(1919, 100)] ##change
+out_line = [(0, 90),(1919, 980)] ##change
 
 def equation(line):
     a = int(line[0][0])
@@ -38,33 +39,42 @@ def check(first, last, in_line, out_line):
         if (a2 * float(p2[0]) + b2 - float(p2[1])) <= 0: # last appear in out_area
             return 1
         elif (a1 * float(p2[0]) + b1 - float(p2[1])) >= 0: # last appear in in_area
-            return -1
+            return 0
+            # return -1
     elif first_appear_out >= 0: # first appear in in_area
         if (a2 * float(p2[0]) + b2 - float(p2[1])) <= 0: # last appear in out_area
             return 1
     elif first_appear_in <= 0: # first appear in out_area
         if (a1 * float(p2[0]) + b1 - float(p2[1])) >= 0: # last appear in in_area
-            return -1
+            return 0
+            # return -1
     return 0
 
 
 fw = Framework.Framework()
 fw.displayer.run()
-idb = ID_Base()
+idb = ID_Base.ID_Base()
 f_cnt = 0
 threashold = 10
 people = 0
 while True:
     f_cnt += 1
-    frame, bounding_boxes, IDs, fps = fw.run_1_frame(draw = True)
+    frame, BB_IDs, fps = fw.run_1_frame(draw = True)
+    cv2.line(frame, in_line[0], in_line[1],(255,0,0),2)
+    cv2.line(frame, out_line[0], out_line[1],(255,0,0),2)
+    cv2.putText(frame, str(people),(200,25), cv2.FONT_HERSHEY_TRIPLEX, 1, (0,0,0))
     fw.displayer.update_frame(frame)
-    for id in idb.id_list:
-        if id not in IDs:
-            if (f_cnt - idb.id_last_frame) > threashold:
-                people += check(idb.id_first[str(id)], idb.id_last[str(id)], in_line, out_line)
-                idb.deleteID(id)
+    to_be_delete = []
+    for id, info in idb.base.items():
+        if id not in BB_IDs[:,4]:
+            if (f_cnt - info.last_frame) > threashold:
+                people += check(info.pos0, info.pos1, in_line, out_line)
+                to_be_delete.append(id)
 
-    idb.updateID(bounding_boxes, IDs, f_cnt)
+    for id in to_be_delete:
+        idb.deleteID(id)
+    idb.updateID(BB_IDs, f_cnt)
+    print(people)
 
 ############### debug code #################
 # inp = input()

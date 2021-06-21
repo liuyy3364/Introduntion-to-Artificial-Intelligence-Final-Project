@@ -18,11 +18,6 @@ class Tracker_Template:
 
 # SORT
 import copy
-def xywh_to_xyxy(bboxes: np.ndarray):
-    ret = copy.deepcopy(bboxes)
-    for i, (x, y, w, h) in enumerate(ret):
-        ret[i] = (x, y, x+w, y+h)
-    return ret
 
 class SORT:
     def __init__(self) -> None:
@@ -30,17 +25,18 @@ class SORT:
         #create instance of SORT
         """
         # raise Exception("use empty class")
-        self.model = Sort(max_age=3, min_hits=1, iou_threshold=0.15)
+        self.mot_tracker = Sort(max_age=15, min_hits=1, iou_threshold=0.15)
     
-    def track(self, track_bbs: np.ndarray) -> list:
+    def track(self, track_bbs: list, scores: list) -> list:
         """
         track_bbs: a list of bounded boxes(x, y, w, h)
-        ret: a list of ids
+        ret: a list of boundings boxes with its id (x, y, w, h, id)
         """
         # raise Exception("not implemented")
-        persons = xywh_to_xyxy(track_bbs)
-        track_bbs_ids = mot_tracker.update(persons)
-        ids = []
-        for (x, y, w, h, bid) in track_bbs_ids:
-            ids.append(bid)
-        return ids
+        if len(track_bbs) == 0:
+            persons = np.empty((0, 5))
+        else:
+            persons = np.concatenate((track_bbs,np.reshape(scores,(len(scores),1))),axis=1)
+        track_bbs_ids = self.mot_tracker.update(persons)
+        
+        return track_bbs_ids
