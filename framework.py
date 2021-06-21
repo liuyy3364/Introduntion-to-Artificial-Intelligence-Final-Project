@@ -15,7 +15,7 @@ class Framework():
     t1=0
     fps=0
     def __init__(self, frame_source='Camera', detector='Haar', 
-                tracker='Tracker', displayer='Displayer', 
+                tracker='Sort', displayer='Displayer', 
                 benchmarker='Benchmarker', optimizer='Optimizer') -> None:      
         """
         function的說明
