@@ -1,4 +1,4 @@
-# 301 OK
+# 301  OK
 import Detector
 import Tracker 
 import Displayer
@@ -14,8 +14,8 @@ class Framework():
     t0=0
     t1=0
     fps=0
-    def __init__(self, frame_source='Camera', detector='Haar', 
-                tracker='Sort', displayer='Displayer', 
+    def __init__(self, frame_source='Camera', detector='Haar', interest_label="person",
+                tracker='Tracker', displayer='Displayer', 
                 benchmarker='Benchmarker', optimizer='Optimizer') -> None:      
         """
         function的說明
@@ -25,7 +25,10 @@ class Framework():
         # self.frame_source = FrameSource.Camera()
 
         detector = getattr(Detector, detector)
-        self.detector = detector()
+        if detector=='yolov5':
+            self.detector = detector(interest_label=interest_label)
+        else:
+            self.detector = detector()
         # self.detector = Detector.Detector()
 
         tracker = getattr(Tracker, tracker)
@@ -78,12 +81,14 @@ class Framework():
         bounding_boxes = self.detect(frame)
         IDs = self.track(bounding_boxes)
         if draw:
-            cv2.rectangle(frame, (0, 0), (50, 20), (0, 0, 255), -1)
-            cv2.putText(frame, str(self.fps), (5, 15), cv2.FONT_HERSHEY_TRIPLEX, 0.5, (0,0,0))
+            cv2.rectangle(frame, (0, 0), (45, 12), (0, 0, 255), -1)
+            cv2.putText(frame, "FPS "+str(self.fps), (1, 10), cv2.FONT_HERSHEY_TRIPLEX, 0.35, (0,0,0))
             for (x, y, w, h), id in zip(bounding_boxes, IDs):
-                    cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
-                    cv2.rectangle(frame, (x, y-20), (x+60, 0), (0, 0, 255), -1)
-                    cv2.putText(frame, "ID "+str(id), (5, 15), cv2.FONT_HERSHEY_TRIPLEX, 0.5, (0,0,0))
+                    # draw bounding box
+                    cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 1)
+                    # put id
+                    cv2.rectangle(frame, (x, y-12), (x+21, y), (0, 0, 255), -1)
+                    cv2.putText(frame, str(id), (x, y-2), cv2.FONT_HERSHEY_TRIPLEX, 0.35, (0,0,0))
         return frame, bounding_boxes, IDs, self.fps
 
     def run_and_display(self):
@@ -93,8 +98,10 @@ class Framework():
             cv2.rectangle(frame, (0, 0), (50, 20), (0, 0, 255), -1)
             cv2.putText(frame, str(fps), (5, 15), cv2.FONT_HERSHEY_TRIPLEX, 0.5, (0,0,0))
             for (x, y, w, h), id in zip(boxes, IDs):
-                    cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
-                    cv2.rectangle(frame, (x, y-20), (x+60, 0), (0, 0, 255), -1)
-                    cv2.putText(frame, "ID "+str(id), (5, 15), cv2.FONT_HERSHEY_TRIPLEX, 0.5, (0,0,0))
-        self.displayer.update_frame(frame)
+                    # draw bounding box
+                    cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 1)
+                    # put id
+                    cv2.rectangle(frame, (x, y-12), (x+21, y), (0, 0, 255), -1)
+                    cv2.putText(frame, str(id), (x, y-2), cv2.FONT_HERSHEY_TRIPLEX, 0.35, (0,0,0))
+            self.displayer.update_frame(frame)
         
