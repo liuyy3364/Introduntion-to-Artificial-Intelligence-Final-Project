@@ -1,5 +1,5 @@
 # 301 OK maybe
-class Optimizer:
+class Optimizer_Template:
     #麻煩 class 名稱第一個字母大寫
     def __init__(self) -> None:
         """

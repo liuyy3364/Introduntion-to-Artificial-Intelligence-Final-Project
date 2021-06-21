@@ -1,5 +1,5 @@
 # 301 OK
-class FrameSource:
+class FrameSource_Template:
     def __init__(self)->None:
         pass
 
