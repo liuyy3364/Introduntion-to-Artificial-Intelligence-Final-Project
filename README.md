@@ -40,7 +40,7 @@ class C():
 - Tracker:
   - base: opencv tracker
   - advance: SORT or DeepSORT
-  - input: frame
+  - input: bounding boxes
   - output: assigned IDs
 
 - Display
