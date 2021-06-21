@@ -1,4 +1,4 @@
-import framework
+import Framework
 import ID_Base
 import numpy as np
 
