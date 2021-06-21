@@ -93,9 +93,15 @@ cat 認領.py
 ## 補充 background
 
 [MOT簡介](https://peaceful0907.medium.com/%E5%88%9D%E6%8E%A2%E7%89%A9%E4%BB%B6%E8%BF%BD%E8%B9%A4-multiple-object-tracking-mot-4f1b42e959f9)
+
 [更詳細的但我覺得用不到看這麼細](https://www.zhihu.com/column/c_1102212337087401984)
+
 [OpenCV padetrian detection](https://www.youtube.com/watch?v=LdlHEr6t45g)
+
 [YOLOv5](https://github.com/ultralytics/yolov5) ，這是盜版yolo，因為不確定原本的repo是不是darknet，懶得爬，可以用其他的版本不一定要用這個
+
 [OpenCV centroid tracker](https://www.youtube.com/watch?v=O3b8lVF93jU)
+
 [DeepSORT](https://github.com/nwojke/deep_sort)
+
 [SORT](https://github.com/abewley/sort)
