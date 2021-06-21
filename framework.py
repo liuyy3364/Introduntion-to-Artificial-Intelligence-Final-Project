@@ -21,28 +21,28 @@ class Framework():
         function的說明
         """
         frame_source = getattr(FrameSource, frame_source)
-        # self.frame_source = frame_source()
-        self.frame_source = FrameSource.Camera()
+        self.frame_source = frame_source()
+        # self.frame_source = FrameSource.Camera()
 
         detector = getattr(Detector, detector)
-        # self.detector = detector()
-        self.detector = Detector.Detector()
+        self.detector = detector()
+        # self.detector = Detector.Detector()
 
         tracker = getattr(Tracker, tracker)
-        # self.tracker = tracker()
-        self.tracker = Tracker.Tracker()
+        self.tracker = tracker()
+        # self.tracker = Tracker.Tracker()
 
         displayer = getattr(Displayer, displayer)
-        # self.displayer = displayer()
-        self.displayer = Displayer.Displayer()
+        self.displayer = displayer()
+        # self.displayer = Displayer.Displayer()
 
         benchmarker = getattr(Benchmarker, benchmarker)
-        # self.benchmarker = benchmarker()
-        self.benchmarker = Benchmarker.Benchmarker()
+        self.benchmarker = benchmarker()
+        # self.benchmarker = Benchmarker.Benchmarker()
 
         optimizer = getattr(Optimizer, optimizer)
-        # self.optimizer = optimizer()
-        self.optimizer = Optimizer.Optimizer()
+        self.optimizer = optimizer()
+        # self.optimizer = Optimizer.Optimizer()
 
     def detect(self, frame) -> List[Tuple[int,int,int,int]]:
         """
