@@ -37,6 +37,8 @@ class Haar:
         persons = self.model.detectMultiScale(gray, scaleFactor = 1.1, minNeighbors = 3)
         return persons
 
+
+import torch
 class YOLOv5:
     #麻煩 class 名稱第一個字母大寫
     def __init__(self, interest_label="person") -> None:
