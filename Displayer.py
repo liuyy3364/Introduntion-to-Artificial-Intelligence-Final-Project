@@ -22,7 +22,7 @@ class Displayer_Template:
         """
         raise Exception("not implemented")
 
-class Flask_Displayer:
+class Flask_VidStream:
     #麻煩 class 名稱第一個字母大寫
     frame = bytes()
 

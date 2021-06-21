@@ -48,14 +48,16 @@ def check(first, last, in_line, out_line):
     return 0
 
 
-fw = framework()
+fw = Framework.Framework()
+fw.displayer.run()
 idb = ID_Base()
 f_cnt = 0
-threashold = 0
+threashold = 10
 people = 0
 while True:
     f_cnt += 1
     frame, bounding_boxes, IDs, fps = fw.run_1_frame(draw = True)
+    fw.displayer.update_frame(frame)
     for id in idb.id_list:
         if id not in IDs:
             if (f_cnt - idb.id_last_frame) > threashold:
