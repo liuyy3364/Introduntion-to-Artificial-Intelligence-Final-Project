@@ -1,6 +1,7 @@
 #310
 import webserver
 from threading import Thread
+import cv2
 # class Displayer:
 #     #麻煩 class 名稱第一個字母大寫
 #     def __init__(self) -> None:
@@ -27,7 +28,9 @@ class Flask_Displayer:
 
     def update_frame(self, frame):
         self.frame = frame
-        webserver.frame_wrapper[0] = self.frame
+        ret , jpg = cv2.imencode(".jpg", frame)
+        jpg = jpg.tobytes()
+        webserver.frame_wrapper[0] = jpg
     
     def run(self):
         """

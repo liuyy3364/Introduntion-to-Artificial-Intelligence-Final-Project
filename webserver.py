@@ -8,14 +8,14 @@ def index():
     return render_template('stream.html')
 
 cam_wrapper = []
-frame_wrapper = [bytes()]
+frame_wrapper = [cv2.imencode('.jpg',cv2.imread('resources/FirstFrame.jpg'))[1].tobytes()]
 def gen():
     while 1:
         frame = frame_wrapper[0]
-        ret , jpg = cv2.imencode(".jpg", frame)
-        jpg = jpg.tobytes()
+        # ret , jpg = cv2.imencode(".jpg", frame)
+        # jpg = jpg.tobytes()
         yield (b'--frame\r\n'
-               b'Content-Type: image/jpeg\r\n\r\n' + jpg + b'\r\n\r\n')
+               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
 
 @app.route('/video_feed')
 def video_feed():
