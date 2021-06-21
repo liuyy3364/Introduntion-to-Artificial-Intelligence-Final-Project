@@ -64,7 +64,7 @@ class Framework():
     def optimize(self) -> list:
         return self.optimizer.optimize()
 
-    def run_1_frame(self) -> Tuple[List[Tuple[int,int,int,int]], List[str], float]:
+    def run_1_frame(self,draw=False) -> Tuple[List[Tuple[int,int,int,int]], List[str], float]:
         """
         return: 
             bounding_boxes: list(TBD)
@@ -77,7 +77,13 @@ class Framework():
         frame = self.frame_source.get_frame()
         bounding_boxes = self.detect(frame)
         IDs = self.track(bounding_boxes)
-
+        if draw:
+            cv2.rectangle(frame, (0, 0), (50, 20), (0, 0, 255), -1)
+            cv2.putText(frame, str(self.fps), (5, 15), cv2.FONT_HERSHEY_TRIPLEX, 0.5, (0,0,0))
+            for (x, y, w, h), id in zip(bounding_boxes, IDs):
+                    cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
+                    cv2.rectangle(frame, (x, y-20), (x+60, 0), (0, 0, 255), -1)
+                    cv2.putText(frame, "ID "+str(id), (5, 15), cv2.FONT_HERSHEY_TRIPLEX, 0.5, (0,0,0))
         return frame, bounding_boxes, IDs, self.fps
 
     def run_and_display(self):

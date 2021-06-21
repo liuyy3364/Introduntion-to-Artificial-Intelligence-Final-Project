@@ -5,9 +5,9 @@ class FrameSource:
     def get_frame(self):
         pass
 
-class Camera:
+import cv2
+class TownCentre:
     def __init__(self)->None:
-        pass
-    
+        self.cap = cv2.VideoCapture("resources/TownCentreXVID.mp4")
     def get_frame(self):
-        pass
+        return self.cap.read()[1]

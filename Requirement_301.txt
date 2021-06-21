@@ -3,4 +3,7 @@ opencv-python
 flask
 numpy
 pillow
+torch
+pandas
+scipy
 pytorch==1.0.0 #這不確定 先不要裝
