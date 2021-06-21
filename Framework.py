@@ -14,9 +14,9 @@ class Framework():
     t0=0
     t1=0
     fps=0
-    def __init__(self, frame_source='Camera', detector='Haar', interest_label="person",
-                tracker='Tracker', displayer='Displayer', 
-                benchmarker='Benchmarker', optimizer='Optimizer') -> None:      
+    def __init__(self, frame_source='TownCentre', detector='YOLOv5', interest_label="person",
+                tracker='SORT', displayer='Flask_VidStream', 
+                optimizer='Netadapt') -> None:      
         """
         function的說明
         """
@@ -25,7 +25,7 @@ class Framework():
         # self.frame_source = FrameSource.Camera()
 
         detector = getattr(Detector, detector)
-        if detector=='yolov5':
+        if detector=='YOLOv5':
             self.detector = detector(interest_label=interest_label)
         else:
             self.detector = detector()
@@ -38,10 +38,6 @@ class Framework():
         displayer = getattr(Displayer, displayer)
         self.displayer = displayer()
         # self.displayer = Displayer.Displayer()
-
-        benchmarker = getattr(Benchmarker, benchmarker)
-        self.benchmarker = benchmarker()
-        # self.benchmarker = Benchmarker.Benchmarker()
 
         optimizer = getattr(Optimizer, optimizer)
         self.optimizer = optimizer()
@@ -60,9 +56,6 @@ class Framework():
         return: a list of IDs
         """
         return self.tracker.track(bounding_boxes)
-    
-    def benchmark(self) -> list:
-        return self.benchmarker.run()
     
     def optimize(self) -> list:
         return self.optimizer.optimize()

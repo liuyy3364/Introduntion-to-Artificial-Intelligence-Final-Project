@@ -2,8 +2,8 @@ from collections import defaultdict
 
 class ID_Base():
     id_list = []
-    id_first = defaultdict(list[tuple[int,int,int,int]])
-    id_last = defaultdict(list[tuple[int,int,int,int]])
+    id_first = defaultdict(list)
+    id_last = defaultdict(list)
     id_last_frame = defaultdict(int)
 
     def updateID(self, bounding_boxes, IDs, frame_cnt):
