@@ -1,16 +1,18 @@
 from collections import defaultdict
 
 class ID_Base():
+    id_list = []
     id_first = defaultdict(list[tuple[int,int,int,int]])
     id_last = defaultdict(list[tuple[int,int,int,int]])
     id_last_frame = defaultdict(int)
 
     def updateID(self, bounding_boxes, IDs, frame_cnt):
         for num, id in enumerate(IDs):
-            if id in self.id_first:
+            if id in self.id_list:
                 self.id_last[str(id)] = bounding_boxes[num]
                 self.id_last_frame[str(id)] = frame_cnt
             else:
+                self.id_list.append(id)
                 self.id_first[str(id)]= bounding_boxes[num]
                 self.id_last[str(id)] = bounding_boxes[num]
                 self.id_last_frame[str(id)] = frame_cnt
@@ -22,9 +24,9 @@ class ID_Base():
     ###########################################       
 
     def deleteID(self, id):
-        del self.id_first[id]
-        del self.id_last[id]
-        del self.id_last_frame[id]
+        del self.id_first[str(id)]
+        del self.id_last[str(id)]
+        del self.id_last_frame[str(id)]
 
 
 ############## debug code #################
