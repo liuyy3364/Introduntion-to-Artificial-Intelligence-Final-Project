@@ -98,7 +98,7 @@ cat 認領.py
 
 [OpenCV padetrian detection](https://www.youtube.com/watch?v=LdlHEr6t45g)
 
-[YOLOv5](https://github.com/ultralytics/yolov5) ，這是盜版yolo，因為不確定原本的repo是不是darknet，懶得爬，可以用其他的版本不一定要用這個
+[YOLOv5](https://github.com/ultralytics/yolov5)
 
 [OpenCV centroid tracker](https://www.youtube.com/watch?v=O3b8lVF93jU)
 
