@@ -3,21 +3,20 @@ import numpy as np
 from sort.sort import *
 
 class Tracker_Template:
-    #麻煩 class 名稱第一個字母大寫
     def __init__(self) -> None:
         """
         function的說明
         """
-        raise Exception("use empty class")
+        raise Exception("using template class")
 
-    def track(self) -> list:
+    def track(self, bounding_boxes: list, scores: list) -> list:
         """
-        function的說明
+        do tracking according to detection results
+        return: a list of boundings boxes with its id (x, y, w, h, id)
         """
         raise Exception("not implemented")
 
 # SORT
-
 class SORT:
     def __init__(self) -> None:
         """

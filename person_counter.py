@@ -3,18 +3,9 @@ import ID_Base
 import numpy as np
 import cv2
 
-# Solving following system of linear equation
-# ax + b = y
-# ex.(-2, 14), (4, -4)
-# -2a + 1b = 14
-# 4a + 1b = -4
-# a = np.array([[-2, 1],[4,1]])
-# b = np.array([14, -4])
-# a, b = np.linalg.solve(a,b) // a=-3, b=8 
-# y = -3x + 8
 
-in_line = [(768, 0),(1919, 100)] ##change
-out_line = [(0, 90),(1919, 980)] ##change
+in_line = [(768, 0),(1919, 100)] 
+out_line = [(0, 90),(1919, 980)] 
 
 def equation(line):
     a = int(line[0][0])
@@ -39,15 +30,15 @@ def check(first, last, in_line, out_line):
         if (a2 * float(p2[0]) + b2 - float(p2[1])) <= 0: # last appear in out_area
             return 1
         elif (a1 * float(p2[0]) + b1 - float(p2[1])) >= 0: # last appear in in_area
-            return 0
-            # return -1
+            # return 0
+            return -1
     elif first_appear_out >= 0: # first appear in in_area
         if (a2 * float(p2[0]) + b2 - float(p2[1])) <= 0: # last appear in out_area
             return 1
     elif first_appear_in <= 0: # first appear in out_area
         if (a1 * float(p2[0]) + b1 - float(p2[1])) >= 0: # last appear in in_area
-            return 0
-            # return -1
+            # return 0
+            return -1
     return 0
 
 

@@ -3,21 +3,19 @@ import numpy as np
 import cv2
 
 class Detector_Template:
-    #麻煩 class 名稱第一個字母大寫
     def __init__(self) -> None:
         """
         function的說明
         """
-        raise Exception("use empty class")
+        raise Exception("using template class")
 
     def detect(self, frame: np.ndarray) -> list:
         """
-        function的說明
+        frame: a frame
+        ret: a list of bounded boxes[x, y, x, y]
         """
         raise Exception("not implemented")
 
-
-#麻煩 class 名稱第一個字母大寫
 class Haar:
     def __init__(self) -> None:
         """
@@ -43,7 +41,6 @@ class Haar:
 
 import torch
 class YOLOv5:
-    #麻煩 class 名稱第一個字母大寫
     def __init__(self, interest_label="person") -> None:
         """
         yolov5 detector

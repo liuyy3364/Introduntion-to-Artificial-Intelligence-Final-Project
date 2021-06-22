@@ -1,10 +1,16 @@
 # 301 OK
 class FrameSource_Template:
     def __init__(self)->None:
-        pass
+        """
+        function的說明
+        """
+        raise Exception("using template class")
 
     def get_frame(self):
-        pass
+        """
+        return: one frame read from the source
+        """
+        raise Exception("not implemented")
 
 import cv2
 class TownCentre:
