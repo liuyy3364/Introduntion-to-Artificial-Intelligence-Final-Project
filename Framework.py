@@ -22,26 +22,21 @@ class Framework():
         """
         frame_source = getattr(FrameSource, frame_source)
         self.frame_source = frame_source()
-        # self.frame_source = FrameSource.Camera()
 
         detector = getattr(Detector, detector)
         if detector=='YOLOv5':
             self.detector = detector(interest_label=interest_label)
         else:
             self.detector = detector()
-        # self.detector = Detector.Detector()
 
         tracker = getattr(Tracker, tracker)
         self.tracker = tracker()
-        # self.tracker = Tracker.Tracker()
 
         displayer = getattr(Displayer, displayer)
         self.displayer = displayer()
-        # self.displayer = Displayer.Displayer()
 
         optimizer = getattr(Optimizer, optimizer)
         self.optimizer = optimizer()
-        # self.optimizer = Optimizer.Optimizer()
 
     def detect(self, frame) -> List[Tuple[int,int,int,int]]:
         """
