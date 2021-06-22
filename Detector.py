@@ -3,21 +3,19 @@ import numpy as np
 import cv2
 
 class Detector_Template:
-    #麻煩 class 名稱第一個字母大寫
     def __init__(self) -> None:
         """
         function的說明
         """
-        raise Exception("use empty class")
+        raise Exception("using template class")
 
     def detect(self, frame: np.ndarray) -> list:
         """
-        function的說明
+        frame: a frame
+        ret: a list of bounded boxes[x, y, x, y]
         """
         raise Exception("not implemented")
 
-
-#麻煩 class 名稱第一個字母大寫
 class Haar:
     def __init__(self) -> None:
         """
@@ -29,18 +27,20 @@ class Haar:
     def detect(self, frame: np.ndarray) -> list:
         """
         frame: a frame
-        ret: a list of bounded box[x, y, w, h]
+        ret: a list of bounded box[x, y, x, y]
         """
         # raise Exception("not implemented")
         # Load the cascade
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         persons = self.model.detectMultiScale(gray, scaleFactor = 1.1, minNeighbors = 3)
-        return persons
+        scores = [1]*len(persons)
+        for i, (x, y, w, h) in enumerate(persons):
+            persons[i] = (x,y,x+w,y+h)
+        return persons, scores
 
 
 import torch
 class YOLOv5:
-    #麻煩 class 名稱第一個字母大寫
     def __init__(self, interest_label="person") -> None:
         """
         yolov5 detector
@@ -51,17 +51,21 @@ class YOLOv5:
 
     def detect(self, frame: np.ndarray) -> list:
         """
-        return bounding boxe [(x,y,w,h)...]
+        return bounding boxe [(x,y,x,y)...]
         """
         result = self.model(frame).pandas().xyxy[0]
         # format xywh
-        boxes=[]
+        boxes = []
+        scores = []
         for i, n in enumerate(result['name']):
             if n==self.interest_label:
-                x = int(result['xmin'][i]) 
-                y = int(result['ymin'][i]) 
-                w = int(result['xmax'][i]) - x
-                h = int(result['ymax'][i]) - y
-                boxes.append((x,y,w,h))
+                if result['confidence'][i] < 0.35:
+                    continue
+                xmin = int(result['xmin'][i]) 
+                ymin = int(result['ymin'][i]) 
+                xmax = int(result['xmax'][i])
+                ymax = int(result['ymax'][i])
+                boxes.append((xmin, ymin, xmax, ymax))
+                scores.append(result['confidence'][i])
 
-        return boxes
+        return boxes, scores
