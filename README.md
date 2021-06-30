@@ -4,7 +4,7 @@ NYCU-2021-Spring-Introduntion-to-Artificial-Intelligence-Final-Project
 
 ## 目標
 
-做一個 Multiple Object Tracking (MOT) 的 framework，可以方便替換 Detector 和 Tracker，並有其他相關需要功能，目前先訂：benchmark 跟 optimize
+做一個 Multiple Object Tracking (MOT) 的 framework，可以方便替換 Detector 和 Tracker，並有其他相關需要功能: benchmark 跟 optimize
 
 最後我們在用這個 framework 做一個人流計算程式，像是用一個架在門口的攝影機就可以計算由這個入口進出的人數
 
