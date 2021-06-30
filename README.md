@@ -60,7 +60,10 @@ NYCU-2021-Spring-Introduntion-to-Artificial-Intelligence-Final-Project
 
 ## Result
 
+- MOT: YOLOv5 + SORT，左下入口，右上出口，只算單邊進入
+
 [影片連結](https://drive.google.com/open?id=1XU6IWtmS9EtDVjyI7nBtBGpsw_O3wCyD)
+
 
 ## Reference
 
