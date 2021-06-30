@@ -16,7 +16,7 @@ NYCU-2021-Spring-Introduntion-to-Artificial-Intelligence-Final-Project
 ## Component of framework
 
 - Framework
-    主程式
+  - 主程式
 
 - Detector:
   - selected algorithm: opencv haar cascade and yolov5
